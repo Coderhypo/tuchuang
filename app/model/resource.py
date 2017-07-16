@@ -12,8 +12,9 @@ class Resource(model):
     res_id = Column(String(64), default=lambda: str(uuid.uuid4()), primary_key=True)
     res_url = Column(String(256))
     res_short_url = Column(String(128), index=True)
+    hash_code = Column(String(128), index=True)
 
-    creator_id = Column(String(64), index=True)
+    creator_id = Column(String(64))
     create_time = Column(DateTime, default=datetime.now)
     update_time = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
