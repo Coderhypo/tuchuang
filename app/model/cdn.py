@@ -11,6 +11,7 @@ class Cdn(model):
     cdn_type = Column(String(64), index=True)
     qiniu_access_key = Column(String(128))
     qiniu_secret_key = Column(String(128))
+    qiniu_bucket_name = Column(String(128))
     url_prefix = Column(String(128))
     url_suffix = Column(String(128))
     user_id = Column(String(64), index=True)

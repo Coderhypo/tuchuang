@@ -5,7 +5,7 @@ class Config(object):
     DEBUG = False
     TEST = False
 
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    PROJECT_PATH = os.path.dirname(os.path.realpath(__file__))
     DATABASE_USER = os.getenv("DATABASE_USER")
     DATABASE_PASS = os.getenv("DATABASE_PASS")
     DATABASE_URI = os.getenv("DATABASE_URI")
@@ -23,7 +23,7 @@ class Config(object):
 # development
 class DevelopmentConfig(Config):
     DEBUG = True
-    TEST = False
+    TEST = True
     SECRET_KEY = "THIS_A_KEY"
 
 
