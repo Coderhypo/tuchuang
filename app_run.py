@@ -3,7 +3,6 @@ from app import create_app
 app = create_app()
 
 
-
 def init_db():
     from app.ext.db import model
     try:
