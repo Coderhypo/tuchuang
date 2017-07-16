@@ -1,9 +1,10 @@
-from sanic_wtf import SanicForm
 from sanic_wtf import FileAllowed, FileRequired, SanicForm
-from wtforms import FileField, SubmitField, StringField
+from wtforms import FileField, SubmitField
 
 
 class IndexForm(SanicForm):
     image = FileField('Image', validators=[
-        FileRequired(), FileAllowed('bmp gif jpg jpeg png'.split())])
-    submit = SubmitField('Upload')
+        FileRequired(message="请添加图片"),
+        FileAllowed('bmp gif jpg jpeg png'.split(" "), message="图片格式不支持"),
+    ])
+    submit = SubmitField("upload")

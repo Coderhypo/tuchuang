@@ -25,17 +25,20 @@ class DevelopmentConfig(Config):
     DEBUG = True
     TEST = True
     SECRET_KEY = "THIS_A_KEY"
+    WTF_CSRF_SECRET_KEY = SECRET_KEY + "WTF"
 
 
 # production
 class ProductionConfig(Config):
-    SECRET_KEY = os.getenv("SECRET_KEY")
+    SECRET_KEY = os.getenv("SECRET_KEY", "")
+    WTF_CSRF_SECRET_KEY = SECRET_KEY + "WTF"
 
 
 # testing
 class TestingConfig(Config):
     TEST = True
     SECRET_KEY = "THIS_A_KEY"
+    WTF_CSRF_SECRET_KEY = SECRET_KEY + "WTF"
 
 
 app_config = {
