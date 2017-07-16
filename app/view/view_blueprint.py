@@ -1,7 +1,9 @@
 from sanic import Blueprint
 from jinja2 import Environment, PackageLoader, select_autoescape
 from sanic.response import html
+
 from app.forms.index import IndexForm
+from app.service.put_file import put_file
 
 view_blueprint = Blueprint('view_blueprint')
 
@@ -16,7 +18,12 @@ def template(tpl, **kwargs):
     return html(template.render(kwargs))
 
 
-@view_blueprint.route("/")
+@view_blueprint.route("/", methods=['GET', 'POST'])
 async def index(request):
-    form = IndexForm(request)
+    print("123", request)
+    request["user"] = 1
+    form = IndexForm(request=request)
+    user_id = None
+    if form.validate_on_submit():
+        put_file(user_id, "qiniu", form.image.data)
     return template("index.html", form=form)
