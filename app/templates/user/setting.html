@@ -1,48 +1,49 @@
 {% extends "base.html" %}
 {% block title %} login {% endblock %}
 {% block content %}
-    <div class="row">
-        <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
-            <form method="POST" action="#">
-                {{ form.csrf_token }}
-                <div class="form-group">
-                    {{ form.access_key.label }}
-                    {{ form.access_key(class="form-control", placeholder="access_key") }}
-                    {% if form.errors.access_key %}
-                        <small class="text-danger">{{ form.errors.access_key[0] }}</small>
-                    {% endif %}
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+        <form method="POST" action="/user/setting">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.access_key.label }}
+                {{ form.access_key(class="form-control", placeholder="Access Key") }}
+                {% if form.errors.access_key %}
+                <small class="text-danger">{{ form.errors.access_key[0] }}</small>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.secret_key.label }}
+                {{ form.secret_key(class="form-control", placeholder="Secret Key") }}
+                {% if form.errors.secret_key %}
+                <small class="text-danger">{{ form.errors.secret_key[0] }}</small>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.bucket_name.label }}
+                {{ form.bucket_name(class="form-control", placeholder="Bucket name") }}
+                {% if form.errors.bucket_name %}
+                <small class="text-danger">{{ form.errors.bucket_name[0] }}</small>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>链接格式</label>
+                <div class="input-group">
+                    {{ form.url_prefix(class="form-control", placeholder="http://") }}
+                    <span class="input-group-addon" id="basic-addon3">
+                        /2017/01/01-00:00.png</span>
+                    {{ form.url_suffix(class="form-control", placeholder="?v=1") }}
                 </div>
-                <div class="form-group">
-                    {{ form.secret_key.label }}
-                    {{ form.secret_key(class="form-control", placeholder="secret_key") }}
-                    {% if form.errors.secret_key %}
-                        <small class="text-danger">{{ form.errors.secret_key[0] }}</small>
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.bucket_name.label }}
-                    {{ form.bucket_name(class="form-control", placeholder="secret_key") }}
-                    {% if form.errors.bucket_name %}
-                        <small class="text-danger">{{ form.errors.bucket_name[0] }}</small>
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.url_prefix.label }}
-                    {{ form.url_prefix(class="form-control", placeholder="url_prefix") }}
-                    {% if form.errors.url_prefix %}
-                        <small class="text-danger">{{ form.errors.url_prefix[0] }}</small>
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.url_suffix.label }}
-                    {{ form.url_suffix(class="form-control", placeholder="url_suffix") }}
-                    {% if form.errors.url_suffix %}
-                        <small class="text-danger">{{ form.errors.url_suffix[0] }}</small>
-                    {% endif %}
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">设置</button>
-            </form>
-        </div>
+                {% if form.errors.url_prefix %}
+                <small class="text-danger">{{ form.errors.url_prefix[0] }}</small>
+                {% endif %}
+                {% if form.errors.url_suffix %}
+                <small class="text-danger">{{ form.errors.url_suffix[0] }}</small>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">设置</button>
+        </form>
     </div>
+</div>
 
 {% endblock %}

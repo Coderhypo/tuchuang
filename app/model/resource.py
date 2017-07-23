@@ -24,6 +24,10 @@ class Resource(model):
         self.creator_id = creator
         self.res_short_url = self.__get_short_url()
 
+    @property
+    def markdown(self):
+        return "![{name}]({url})".format(name=self.res_id, url=self.res_url)
+
     @classmethod
     def __get_short_url(cls):
         session = Session()

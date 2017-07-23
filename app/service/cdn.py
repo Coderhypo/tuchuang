@@ -13,3 +13,10 @@ def setting_to_cdn(user_id, qiniu_access_key, qiniu_secret_key, qiniu_bucket_nam
     session.add(cdn)
     session.commit()
     return cdn
+
+
+def get_cdn_by_type(user_id, cdn_type):
+    session = Session()
+    cdn = session.query(Cdn).filter_by(user_id=user_id, cdn_type=cdn_type).first()
+    cdn = session.query(Cdn).filter_by(user_id=user_id, cdn_type=cdn_type).first()
+    return cdn
