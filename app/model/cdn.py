@@ -23,9 +23,10 @@ class Cdn(model):
         self.user_id = user_id
         self.cdn_type = cdn_type
 
-    def set_qiniu(self, qiniu_access_key, qiniu_secret_key):
+    def set_qiniu(self, qiniu_access_key, qiniu_secret_key, qiniu_bucket_name):
         self.qiniu_access_key = qiniu_access_key
         self.qiniu_secret_key = qiniu_secret_key
+        self.qiniu_bucket_name = qiniu_bucket_name
 
     def set_url(self, url_prefix, url_suffix):
         self.url_prefix = url_prefix

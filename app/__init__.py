@@ -19,4 +19,11 @@ def create_app():
     async def add_session_to_request(request):
         request['session'] = session
 
+    @app.middleware('request')
+    async def get_current_user(request):
+        from app.utils.helper import get_current_user
+        from app.ext.jinja import Template
+        request['current_user'] = get_current_user(request)
+        request['template'] = Template(request['current_user']).template
+
     return app

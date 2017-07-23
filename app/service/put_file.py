@@ -3,6 +3,7 @@ import random
 import string
 import hashlib
 from datetime import datetime
+from urllib.parse import urljoin
 
 from app.model.cdn import Cdn
 from app.model.resource import Resource
@@ -35,6 +36,7 @@ def put_file(user_id, cdn_type, file):
     file_url = put_file_to_cdn(user_id, cdn_type, file_path, file_type)
 
     resource = Resource(file_url, creator=user_id)
+    resource.hash_code = hash_code
     session.add(resource)
     session.commit()
 
@@ -48,7 +50,7 @@ def get_file_name(file_type):
         month=now.month,
         day=now.day,
         time=now.time(),
-        random=random.sample(string.ascii_uppercase, 4),
+        random="".join(random.sample(string.ascii_uppercase, 4)),
         file_type=file_type,
     )
 
@@ -69,8 +71,8 @@ def put_file_to_qiniu(cdn_config, file_path, file_type):
     file_name = get_file_name(file_type)
     result = tool.put_file(file_name, file_path)
     file_url = result['url']
-    file_url = "{prefix}{path}{suffix}".format(
-        prefix=cdn_config.url_prefix,
+    file_url = urljoin(cdn_config.url_prefix + "/", file_url)
+    file_url = "{path}{suffix}".format(
         path=file_url,
         suffix=cdn_config.url_suffix,
     )

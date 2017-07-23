@@ -7,6 +7,7 @@ chardet==3.0.4
 gunicorn==19.7.1
 httptools==0.0.9
 idna==2.5
+itsdangerous==0.24
 Jinja2==2.9.6
 kombu==4.0.2
 MarkupSafe==1.0

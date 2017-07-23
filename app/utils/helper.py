@@ -1,10 +1,11 @@
 import random
 import string
+
 from itsdangerous import URLSafeSerializer, BadSignature
 
+from app.config import get_config_obj
 from app.ext.db import Session
 from app.model.user import User
-from app.config import get_config_obj
 
 USER_INFO_COOKIE = "U_I"
 config_obj = get_config_obj()
@@ -12,11 +13,15 @@ serializer = URLSafeSerializer(config_obj.SECRET_KEY)
 
 
 def set_current_user(response, user):
-    u = {
-        "user_id": user.user_id,
-        "salt": random.sample(string.ascii_letters, 10),
-    }
-    cookie = serializer.dumps(u)
+    if user:
+        u = {
+            "user_id": user.user_id,
+            "salt": random.sample(string.ascii_letters, 10),
+        }
+        cookie = serializer.dumps(u)
+
+    else:
+        cookie = None
     response.cookies[USER_INFO_COOKIE] = cookie
     return response
 
