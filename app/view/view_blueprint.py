@@ -2,16 +2,12 @@ from sanic import Blueprint
 
 from app.forms.index import IndexForm
 from app.service.put_file import put_file
-from app.utils.helper import get_current_user
 
 view_blueprint = Blueprint('view_blueprint')
 
 
 @view_blueprint.route("/", methods=['GET', 'POST'])
 async def index(request):
-    print("123", request)
-
-    request["user"] = 1
     form = IndexForm(request=request)
     user = request.get("current_user")
     if user:

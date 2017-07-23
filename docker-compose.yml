@@ -1,0 +1,24 @@
+version: "2.0"
+
+services:
+    web:
+      build: .
+      image: tuchuang_web:latest
+      links:
+        - db:db
+      restart: always
+      ports:
+        - 8888:8888
+      environment:
+        - DATABASE_USER=root
+        - DATABASE_PASS=root
+        - DATABASE_URI=db
+        - DATABASE_DB=tuchuang
+        - RUNTIME=PRODUCTION
+
+    db:
+      image: mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=tuchuang
+      restart: always
